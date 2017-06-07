@@ -81,6 +81,14 @@ def search_posts(q):
 
 ############### WORKFLOW ###############
 
+def show_options():
+    wf.add_item(
+        "Start Typing to search for posts.",
+        valid=False) # makes it not actionable
+    
+    wf.send_feedback()
+    return 0;
+
 def add_posts(posts):
     for post in posts:
         url = '{}/{}'.format(POST_URL, post['id'])
@@ -137,7 +145,7 @@ def main(wf):
     # Show popular subreddits
     # ------------------------------------------------------------------
     if query == '':
-        log.debug("blah")
+        show_options()
     else:
         posts = search_posts(query)
         add_posts(posts)
